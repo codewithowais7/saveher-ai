@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#180065",
+                    "surface-container-highest": "#35343a",
+                    "tertiary-fixed": "#ffdad6",
+                    "background": "#131318",
+                    "error": "#ffb4ab",
+                    "on-primary-container": "#25008c",
+                    "surface-bright": "#39383e",
+                    "surface-container-low": "#1b1b20",
+                    "surface": "#131318",
+                    "on-tertiary-fixed-variant": "#93000b",
+                    "outline": "#928ea0",
+                    "error-container": "#93000a",
+                    "on-surface-variant": "#c9c4d7",
+                    "on-secondary-fixed": "#1a1249",
+                    "primary-fixed-dim": "#c7bfff",
+                    "on-secondary-fixed-variant": "#463f77",
+                    "on-primary-fixed-variant": "#4228bb",
+                    "secondary": "#c7bfff",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "tertiary-container": "#ff544a",
+                    "inverse-on-surface": "#303036",
+                    "surface-tint": "#c7bfff",
+                    "primary-fixed": "#e4deff",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#410002",
+                    "secondary-container": "#463f77",
+                    "surface-container-high": "#2a292f",
+                    "on-error": "#690005",
+                    "secondary-fixed-dim": "#c7bfff",
+                    "on-secondary": "#2f295f",
+                    "surface-container-lowest": "#0e0e13",
+                    "tertiary": "#ffb4ab",
+                    "surface-container": "#1f1f25",
+                    "primary-container": "#8e7fff",
+                    "inverse-surface": "#e4e1e9",
+                    "on-tertiary-container": "#5c0004",
+                    "secondary-fixed": "#e4deff",
+                    "primary": "#c7bfff",
+                    "surface-dim": "#131318",
+                    "on-background": "#e4e1e9",
+                    "inverse-primary": "#5a46d3",
+                    "on-primary": "#2b009e",
+                    "on-tertiary": "#690005",
+                    "surface-variant": "#35343a",
+                    "on-secondary-container": "#b6aeee",
+                    "on-surface": "#e4e1e9",
+                    "outline-variant": "#474554"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pulse-ring {
+            box-shadow: 0 0 0 0 rgba(220, 38, 36, 0.7);
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 36, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 40px rgba(220, 38, 36, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 36, 0); }
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0f] text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col">
+<!-- TopNavBar (Suppressed for focused emergency state) -->
+<header class="fixed top-0 w-full z-50 bg-[#0a0a0f]/60 backdrop-blur-3xl shadow-[0_0_40px_rgba(199,191,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-extrabold tracking-tighter text-white">SaveHer AI</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#dc2626] shadow-[0_0_8px_#dc2626]"></div>
+<span class="font-['Inter'] font-semibold text-sm tracking-tight text-[#dc2626] uppercase">Emergency Mode Active</span>
+</div>
+<button class="text-white/60 hover:text-white transition-colors duration-300 font-semibold text-sm">Cancel</button>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-12 px-6 max-w-5xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Center SOS Action Area -->
+<div class="lg:col-span-7 flex flex-col items-center justify-center py-12">
+<div class="relative flex items-center justify-center mb-16">
+<!-- Outer Pulse Rings -->
+<div class="absolute w-[320px] h-[320px] rounded-full border border-[#dc2626]/20 animate-ping opacity-20"></div>
+<div class="absolute w-[240px] h-[240px] rounded-full border border-[#dc2626]/40 animate-pulse opacity-30"></div>
+<!-- Main SOS Button -->
+<button class="relative z-10 w-48 h-48 rounded-full bg-[#dc2626] flex items-center justify-center pulse-ring active:scale-95 transition-transform duration-200 shadow-[0_0_60px_rgba(220,38,36,0.4)]">
+<span class="text-white font-extrabold text-5xl tracking-tighter">SOS</span>
+</button>
+</div>
+<div class="text-center space-y-4">
+<h1 class="text-3xl font-extrabold text-white tracking-tight">Alert sent to 3 contacts</h1>
+<p class="text-white/60 max-w-md mx-auto text-lg">Your live location, audio recording, and visual data are being broadcasted to your emergency network and The Sentinel's Veil AI monitoring center.</p>
+<div class="flex items-center justify-center gap-4 mt-8">
+<span class="bg-surface-container-high px-4 py-2 rounded-full border border-white/5 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#dc2626] text-sm" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+<span class="text-xs font-semibold uppercase tracking-widest text-white/40">Recording Audio...</span>
+</span>
+<span class="bg-surface-container-high px-4 py-2 rounded-full border border-white/5 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#dc2626] text-sm" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="text-xs font-semibold uppercase tracking-widest text-white/40">Broadcasting GPS</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Sidebar Info Area -->
+<div class="lg:col-span-5 space-y-6">
+<!-- Location Card -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-2xl border border-white/5">
+<div class="relative h-48 w-full bg-surface-container-highest group">
+<img alt="Satellite map view" class="w-full h-full object-cover opacity-60" data-alt="Detailed dark satellite map showing urban street grid with a glowing red circular waypoint marker in the center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2SRAtPf5T8VO32yYJtH4qX_ylZT4vNhZTY-8oXnpzh4bbKdQekrC-llirn5XZnZOAF-JLHiauUG3eS-l7Q4qDGvwi0lHe7tHeuRjFifI8jZpWot8eO-MFRsUXdQgWsj0d5dWVdmwaWBXOBs-LrMG5BG3SRUDMHJ0fwTP4WhDI69g3OcH9IC8oMa4XKCjmVKax6vdWr0hcqZ7DfJ0I_Aq5OpUlDDsu-DX5D3skFI5n21Fl0un1t6vH9OQ4zm0HxZ66fDhKngMIhyQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex flex-col">
+<span class="text-white font-bold text-lg">Current Location</span>
+<span class="text-white/60 text-xs">4517 Washington Ave. Manchester, KY</span>
+</div>
+<a class="absolute bottom-4 right-4 bg-white text-black p-2 rounded-lg hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+<div class="p-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-lg bg-[#dc2626]/10">
+<span class="material-symbols-outlined text-[#dc2626]" style="font-variation-settings: 'FILL' 1;">my_location</span>
+</div>
+<div>
+<div class="text-white font-semibold">GPS Accuracy</div>
+<div class="text-white/40 text-xs uppercase tracking-tighter">± 3 Meters</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-white font-bold">12:45 PM</div>
+<div class="text-white/40 text-xs">Last updated 2s ago</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Emergency Contacts List -->
+<div class="space-y-4">
+<h2 class="text-sm font-semibold uppercase tracking-widest text-white/40 ml-1">Notified Contacts</h2>
+<!-- Contact Card 1 -->
+<div class="bg-surface-container-high/40 backdrop-blur-xl p-4 rounded-xl border border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-[#dc2626]">
+<img alt="Marcus" class="w-full h-full object-cover" data-alt="Portrait of a mature man with a kind expression and grey beard in professional studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaxF0_EhhZIFbgzz8K9yLaTPsn5wtLp4c_xOltwDahTAEOZ5_wZ2AIjFW_pQOEBznuvqatt76QCXVmTh_3S6IBZ8TkvUVoepKm-SjSM8dTV0cXHyFbJXl38jxIQIda66I8jDrhwXkpHO9ImRE2ikyx6TgVhlif43W9VYjrJ6N1LM1CDRbEgPMGnff08Dq33i0NgEIMbir7xbPceM7D1ecEbjZKlj3gJGrTsTBmrtMjmeJtS3_sKESWnFdUhXqnrS1a4tQafUbYGWg"/>
+</div>
+<div>
+<div class="text-white font-bold">Marcus (Father)</div>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-xs text-white/60">Received Alert</span>
+</div>
+</div>
+</div>
+<button class="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all">
+<span class="material-symbols-outlined">call</span>
+</button>
+</div>
+<!-- Contact Card 2 -->
+<div class="bg-surface-container-high/40 backdrop-blur-xl p-4 rounded-xl border border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-[#dc2626]">
+<img alt="Sarah" class="w-full h-full object-cover" data-alt="Close up portrait of a young woman with dark hair and intense focus looking at the camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC42hlGOKzDHWdgQg_QUJpZrOrGjAqxVoUB5uLsoaZzucTMLSrWkU0Q8IFcTe1MvOlwGCA9NrTv6rRTTZsnH3OTOgRlUK-mxJUpYzW3HTNBgKIvgxC5LCJREGv-iKb_SnDW1WS6EU4_gY7lXesvv-PVez0P7M8aO44omzcPrP1b8KVmmbd_IpkREZsQY7QqZNLdWYxYs6A17LmwBAs3mjr8SQiE06CsJv4uoiNLAeSevzG1C_Uw5qdjTbeIETUW7aImS8lUGl8Cr1w"/>
+</div>
+<div>
+<div class="text-white font-bold">Sarah (Roommate)</div>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-xs text-white/60">Viewing Live Stream</span>
+</div>
+</div>
+</div>
+<button class="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all">
+<span class="material-symbols-outlined">call</span>
+</button>
+</div>
+<!-- Contact Card 3 (Police) -->
+<div class="bg-surface-container-high/40 backdrop-blur-xl p-4 rounded-xl border border-[#dc2626]/30 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#dc2626]/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#dc2626]" style="font-variation-settings: 'FILL' 1;">local_police</span>
+</div>
+<div>
+<div class="text-[#dc2626] font-bold">Local Authorities</div>
+<div class="flex items-center gap-1.5">
+<div class="flex gap-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#dc2626] animate-pulse"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" style="animation-delay: 0.2s"></span>
+</div>
+<span class="text-xs text-[#dc2626]">Dispatch Notified</span>
+</div>
+</div>
+</div>
+<button class="px-4 py-2 rounded-lg bg-[#dc2626] text-white font-bold text-xs uppercase tracking-widest">
+                        911 Active
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Emergency Protocol Actions -->
+<div class="fixed bottom-12 left-1/2 -translate-x-1/2 w-full max-w-xs px-6">
+<button class="w-full bg-surface-container-highest border border-white/10 py-5 rounded-2xl flex items-center justify-center gap-3 active:scale-95 transition-all shadow-2xl backdrop-blur-xl group">
+<span class="material-symbols-outlined text-white/40 group-hover:text-[#dc2626] transition-colors">cancel</span>
+<span class="text-white font-bold uppercase tracking-[0.2em] text-sm">False Alarm</span>
+</button>
+<p class="text-center mt-4 text-[10px] text-white/20 uppercase tracking-widest">Hold button to deactivate emergency mode</p>
+</div>
+<!-- Footer -->
+<footer class="w-full border-t border-white/5 bg-[#0a0a0f] mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full">
+<div class="text-lg font-black text-white/80 mb-6 md:mb-0">SaveHer AI</div>
+<div class="flex flex-wrap justify-center gap-8 mb-8 md:mb-0">
+<a class="font-['Inter'] font-normal text-xs text-white/40 uppercase tracking-widest hover:text-white transition-opacity duration-300" href="#">Privacy Policy</a>
+<a class="font-['Inter'] font-normal text-xs text-white/40 uppercase tracking-widest hover:text-white transition-opacity duration-300" href="#">Terms of Service</a>
+<a class="font-['Inter'] font-normal text-xs text-white/40 uppercase tracking-widest hover:text-white transition-opacity duration-300 text-[#7c6af7]" href="#">Emergency Protocol</a>
+</div>
+<p class="font-['Inter'] font-normal text-xs text-white/40 uppercase tracking-widest">© 2024 SaveHer AI. Protected by The Sentinel’s Veil.</p>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,47 @@
+"use client";
+
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+import { useEffect, ReactNode } from "react";
+
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
+
+/**
+ * Wrap any page to require authentication AND email verification.
+ * - Redirects to /login if unauthenticated.
+ * - Redirects to /verify-email if authenticated but email not verified
+ *   AND the user did NOT sign in with Google (Google users are always verified).
+ */
+export default function ProtectedRoute({ children }: ProtectedRouteProps) {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) {
+      router.replace("/login");
+      return;
+    }
+    // Check if signed in with Google — Google accounts are always email-verified
+    const isGoogle = user.providerData.some((p) => p.providerId === "google.com");
+    if (!isGoogle && !user.emailVerified) {
+      router.replace("/verify-email");
+    }
+  }, [user, loading, router]);
+
+  // Show nothing while loading or redirecting
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <span className="w-8 h-8 rounded-full border-2 border-white/10 border-t-[#c7bfff] animate-spin" />
+      </div>
+    );
+  }
+
+  const isGoogle = user?.providerData.some((p) => p.providerId === "google.com");
+  if (!user || (!isGoogle && !user.emailVerified)) return null;
+
+  return <>{children}</>;
+}

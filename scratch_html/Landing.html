@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SaveHer AI | Your Shield Against Online Harassment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#180065",
+                    "surface-container-highest": "#35343a",
+                    "tertiary-fixed": "#ffdad6",
+                    "background": "#0a0a0f",
+                    "error": "#ffb4ab",
+                    "on-primary-container": "#25008c",
+                    "surface-bright": "#39383e",
+                    "surface-container-low": "#1b1b20",
+                    "surface": "#131318",
+                    "on-tertiary-fixed-variant": "#93000b",
+                    "outline": "#928ea0",
+                    "error-container": "#93000a",
+                    "on-surface-variant": "#c9c4d7",
+                    "on-secondary-fixed": "#1a1249",
+                    "primary-fixed-dim": "#c7bfff",
+                    "on-secondary-fixed-variant": "#463f77",
+                    "on-primary-fixed-variant": "#4228bb",
+                    "secondary": "#c7bfff",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "tertiary-container": "#ff544a",
+                    "inverse-on-surface": "#303036",
+                    "surface-tint": "#c7bfff",
+                    "primary-fixed": "#e4deff",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#410002",
+                    "secondary-container": "#463f77",
+                    "surface-container-high": "#2a292f",
+                    "on-error": "#690005",
+                    "secondary-fixed-dim": "#c7bfff",
+                    "on-secondary": "#2f295f",
+                    "surface-container-lowest": "#0e0e13",
+                    "tertiary": "#ffb4ab",
+                    "surface-container": "#1f1f25",
+                    "primary-container": "#8e7fff",
+                    "inverse-surface": "#e4e1e9",
+                    "on-tertiary-container": "#5c0004",
+                    "secondary-fixed": "#e4deff",
+                    "primary": "#c7bfff",
+                    "surface-dim": "#131318",
+                    "on-background": "#e4e1e9",
+                    "inverse-primary": "#5a46d3",
+                    "on-primary": "#2b009e",
+                    "on-tertiary": "#690005",
+                    "surface-variant": "#35343a",
+                    "on-secondary-container": "#b6aeee",
+                    "on-surface": "#e4e1e9",
+                    "outline-variant": "#474554"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pulse-pip {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .7; transform: scale(1.2); }
+        }
+        .glass-panel {
+            background: rgba(31, 31, 37, 0.6);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0a0a0f]/60 backdrop-blur-3xl shadow-[0_0_40px_rgba(199,191,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-extrabold tracking-tighter text-white">SaveHer AI</div>
+<div class="hidden md:flex gap-8 items-center font-['Inter'] font-semibold text-sm tracking-tight">
+<a class="text-white border-b-2 border-[#7c6af7] pb-1" href="#">Features</a>
+<a class="text-white/60 hover:text-white transition-colors duration-300" href="#">How it works</a>
+<a class="text-white/60 hover:text-white transition-colors duration-300" href="#">Report</a>
+</div>
+<button class="bg-[#7c6af7] text-white px-5 py-2.5 rounded-lg font-extrabold text-sm active:scale-95 duration-200 shadow-lg shadow-primary/20">
+                Get Protected
+            </button>
+</div>
+</nav>
+<main class="pt-32 overflow-hidden">
+<!-- Hero Section -->
+<section class="relative max-w-7xl mx-auto px-8 mb-24 lg:mb-40">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/15 mb-6">
+<span class="w-2 h-2 rounded-full bg-[#7c6af7] pulse-pip shadow-[0_0_8px_#7c6af7]"></span>
+<span class="text-[10px] font-semibold uppercase tracking-widest text-white/60">AI-Powered Safety Platform</span>
+</div>
+<h1 class="text-6xl md:text-7xl font-extrabold tracking-tighter text-white leading-[1.1] mb-8">
+                        Your shield against <br/>
+<span class="bg-gradient-to-r from-[#7c6af7] to-[#c7bfff] bg-clip-text text-transparent">online harassment</span>
+</h1>
+<p class="text-lg text-white/40 max-w-md mb-10 leading-relaxed">
+                        Advanced neural monitoring and automated legal documentation for a safer digital footprint. Immediate analysis, zero friction.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-gradient-to-br from-[#c7bfff] to-[#8e7fff] text-on-primary-fixed px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200">
+                            Analyze Harassment
+                        </button>
+<button class="border border-outline-variant/20 text-white/60 px-8 py-4 rounded-lg font-semibold text-sm hover:text-white hover:bg-white/5 transition-all">
+                            See how it works
+                        </button>
+<button class="bg-tertiary-container text-white px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-white pulse-pip"></span>
+                            SOS Emergency
+                        </button>
+</div>
+</div>
+<!-- Floating Visuals -->
+<div class="relative min-h-[500px] flex items-center justify-center">
+<!-- Background ambient glow -->
+<div class="absolute inset-0 bg-[#7c6af7]/10 blur-[120px] rounded-full"></div>
+<!-- AI Result Card -->
+<div class="absolute top-0 right-0 md:right-10 glass-panel p-6 rounded-xl border border-white/10 shadow-2xl w-72 transform rotate-3 z-20">
+<div class="flex justify-between items-center mb-6">
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">Analysis Status</span>
+<span class="material-symbols-outlined text-primary text-sm">verified_user</span>
+</div>
+<div class="space-y-4">
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[92%]"></div>
+</div>
+<div class="flex justify-between text-[11px] font-bold">
+<span class="text-white/60">THREAT LEVEL</span>
+<span class="text-primary">SEVERE (92%)</span>
+</div>
+<div class="p-3 bg-white/5 rounded-lg border border-white/5">
+<p class="text-[12px] text-white/80 font-medium">System detected pattern-based targeted harassment. Evidence locked.</p>
+</div>
+</div>
+</div>
+<!-- Complaint Preview Card -->
+<div class="absolute bottom-10 left-0 md:left-10 glass-panel p-6 rounded-xl border border-white/10 shadow-2xl w-80 transform -rotate-2 z-10">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">description</span>
+</div>
+<div>
+<h4 class="text-xs font-extrabold text-white">IT Act Draft</h4>
+<p class="text-[10px] text-white/40">Ready for submission</p>
+</div>
+</div>
+<div class="space-y-2 opacity-40">
+<div class="h-2 bg-white/20 rounded w-full"></div>
+<div class="h-2 bg-white/20 rounded w-5/6"></div>
+<div class="h-2 bg-white/20 rounded w-4/6"></div>
+</div>
+<div class="mt-6 flex gap-2">
+<div class="h-8 flex-1 bg-primary/10 rounded border border-primary/20"></div>
+<div class="h-8 w-8 bg-primary rounded"></div>
+</div>
+</div>
+<img alt="Abstract digital network visualization" class="w-full h-[400px] object-cover rounded-3xl opacity-20 grayscale mix-blend-screen" data-alt="Intricate 3D digital mesh network glowing with deep violet and blue light against a pitch black background, cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnYhSy2hCStyN9xMw7z38E3e_e0qJZnz8qnkd6JIGAhrwQHuws6RJdt6B2sl-bpDni1aQZMYLdDneXKIeqZ7rcZaqfQcV32uI7W-aABO9k9OxmRp0kEE3nNiMdoICU8dGrj_CDI6KwVDyWAqeFGKIK5pCjAEUb3mIVcalQ7cxsu_pG80-lK2ifaaNcNHDvT33-2xAZ4i48hGqSlz42G7qLHdajXCG3QYqQdR5LW1waRps4dbYVVVy-oQ68XaeFAChPeNA6aQu6kHk"/>
+</div>
+</div>
+</section>
+<!-- Stats Bar -->
+<section class="w-full bg-surface-container-low py-12 border-y border-white/5">
+<div class="max-w-7xl mx-auto px-8 flex flex-wrap justify-center md:justify-between gap-12">
+<div class="text-center md:text-left">
+<div class="text-3xl font-extrabold text-white mb-1">2.4s</div>
+<div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase">avg analysis speed</div>
+</div>
+<div class="text-center md:text-left">
+<div class="text-3xl font-extrabold text-white mb-1">100%</div>
+<div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase">privacy guaranteed</div>
+</div>
+<div class="text-center md:text-left">
+<div class="text-3xl font-extrabold text-white mb-1">IT Act</div>
+<div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase">compliant reporting</div>
+</div>
+<div class="text-center md:text-left">
+<div class="text-3xl font-extrabold text-white mb-1">24/7</div>
+<div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase">active monitoring</div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="max-w-7xl mx-auto px-8 py-32">
+<div class="mb-20 text-center">
+<h2 class="text-4xl font-extrabold text-white mb-4 tracking-tight">Engineered for Absolute Protection</h2>
+<p class="text-white/40 max-w-xl mx-auto">Our multi-layered approach combines linguistic AI with legal intelligence to provide a fortress around your online identity.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="group bg-surface-container-low p-10 rounded-2xl border border-white/[0.03] hover:bg-surface-container-high transition-all duration-500">
+<div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[#7c6af7] text-3xl">psychology</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-4">Linguistic Neural Shield</h3>
+<p class="text-white/40 text-sm leading-relaxed">Proprietary LLMs trained to detect subtle forms of micro-aggression, gaslighting, and organized harassment patterns across 12 languages.</p>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-container-low p-10 rounded-2xl border border-white/[0.03] hover:bg-surface-container-high transition-all duration-500">
+<div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[#7c6af7] text-3xl">gavel</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-4">Auto-Legal Drafting</h3>
+<p class="text-white/40 text-sm leading-relaxed">Instant generation of legally binding complaints formatted precisely for cyber-cell submission and platform-specific takedown requests.</p>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-container-low p-10 rounded-2xl border border-white/[0.03] hover:bg-surface-container-high transition-all duration-500">
+<div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[#7c6af7] text-3xl">privacy_tip</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-4">Encrypted Evidence Vault</h3>
+<p class="text-white/40 text-sm leading-relaxed">All detected instances are timestamped and cryptographically locked on local storage, ensuring your data never leaves your control without consent.</p>
+</div>
+</div>
+</section>
+<!-- Bottom CTA -->
+<section class="max-w-7xl mx-auto px-8 pb-32">
+<div class="relative bg-gradient-to-br from-[#1b1b20] to-[#0a0a0f] rounded-[32px] p-12 md:p-24 overflow-hidden text-center border border-white/5">
+<!-- Decorative background elements -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-[#7c6af7]/5 blur-[100px]"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-tertiary-container/5 blur-[80px]"></div>
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-extrabold text-white mb-8 tracking-tighter">Your digital peace of mind starts here.</h2>
+<p class="text-lg text-white/40 mb-12">Join 10,000+ users who have regained control over their social media experience.</p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-6">
+<button class="w-full md:w-auto bg-white text-background px-10 py-5 rounded-xl font-extrabold text-base hover:bg-[#c7bfff] transition-colors duration-300">
+                            Create Private Account
+                        </button>
+<button class="w-full md:w-auto text-white/80 font-semibold flex items-center gap-2 group">
+                            Contact Support 
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-white/5 bg-[#0a0a0f]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-7xl mx-auto">
+<div class="flex flex-col items-center md:items-start gap-4 mb-8 md:mb-0">
+<div class="text-lg font-black text-white/80">SaveHer AI</div>
+<p class="font-['Inter'] font-normal text-[10px] text-white/40 uppercase tracking-widest">© 2024 SaveHer AI. Protected by The Sentinel’s Veil.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 font-['Inter'] font-normal text-xs text-white/40 uppercase tracking-widest">
+<a class="hover:text-white transition-opacity duration-300" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-opacity duration-300" href="#">Terms of Service</a>
+<a class="hover:text-white transition-opacity duration-300" href="#">Contact Support</a>
+<a class="hover:text-white transition-opacity duration-300 text-[#7c6af7]" href="#">Emergency Protocol</a>
+</div>
+</div>
+</footer>
+</body></html>

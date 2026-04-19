@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# explicitly requested by user
+.env
+.env.local
+.env*.local
+.firebase/
+firebase-debug.log
+Thumbs.db

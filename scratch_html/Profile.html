@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#180065",
+                    "surface-container-highest": "#35343a",
+                    "tertiary-fixed": "#ffdad6",
+                    "background": "#131318",
+                    "error": "#ffb4ab",
+                    "on-primary-container": "#25008c",
+                    "surface-bright": "#39383e",
+                    "surface-container-low": "#1b1b20",
+                    "surface": "#131318",
+                    "on-tertiary-fixed-variant": "#93000b",
+                    "outline": "#928ea0",
+                    "error-container": "#93000a",
+                    "on-surface-variant": "#c9c4d7",
+                    "on-secondary-fixed": "#1a1249",
+                    "primary-fixed-dim": "#c7bfff",
+                    "on-secondary-fixed-variant": "#463f77",
+                    "on-primary-fixed-variant": "#4228bb",
+                    "secondary": "#c7bfff",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "tertiary-container": "#ff544a",
+                    "inverse-on-surface": "#303036",
+                    "surface-tint": "#c7bfff",
+                    "primary-fixed": "#e4deff",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#410002",
+                    "secondary-container": "#463f77",
+                    "surface-container-high": "#2a292f",
+                    "on-error": "#690005",
+                    "secondary-fixed-dim": "#c7bfff",
+                    "on-secondary": "#2f295f",
+                    "surface-container-lowest": "#0e0e13",
+                    "tertiary": "#ffb4ab",
+                    "surface-container": "#1f1f25",
+                    "primary-container": "#8e7fff",
+                    "inverse-surface": "#e4e1e9",
+                    "on-tertiary-container": "#5c0004",
+                    "secondary-fixed": "#e4deff",
+                    "primary": "#c7bfff",
+                    "surface-dim": "#131318",
+                    "on-background": "#e4e1e9",
+                    "inverse-primary": "#5a46d3",
+                    "on-primary": "#2b009e",
+                    "on-tertiary": "#690005",
+                    "surface-variant": "#35343a",
+                    "on-secondary-container": "#b6aeee",
+                    "on-surface": "#e4e1e9",
+                    "outline-variant": "#474554"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass {
+            background: rgba(31, 31, 37, 0.6);
+            backdrop-filter: blur(24px);
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #c7bfff 0%, #8e7fff 100%);
+        }
+        .ghost-border {
+            border: 1px solid rgba(71, 69, 84, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-white">
+<!-- TopNavBar Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-[#0a0a0f]/60 backdrop-blur-3xl shadow-[0_0_40px_rgba(199,191,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-extrabold tracking-tighter text-white">SaveHer AI</div>
+<div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-tight font-['Inter']">
+<a class="text-white/60 hover:text-white transition-colors duration-300" href="#">Features</a>
+<a class="text-white/60 hover:text-white transition-colors duration-300" href="#">How it works</a>
+<a class="text-white/60 hover:text-white transition-colors duration-300" href="#">Report</a>
+<a class="text-white border-b-2 border-[#7c6af7] pb-1" href="#">Profile</a>
+</div>
+<button class="signature-gradient text-on-primary-fixed px-5 py-2 rounded-lg font-extrabold text-sm active:scale-95 duration-200">
+                Get Protected
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-6 max-w-7xl mx-auto min-h-screen">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: User Profile Anchor -->
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-surface-container-low rounded-xl p-8 flex flex-col items-center text-center ghost-border">
+<div class="w-32 h-32 rounded-full signature-gradient flex items-center justify-center text-on-primary-container text-4xl font-extrabold mb-6 shadow-[0_0_30px_rgba(199,191,255,0.2)]">
+                        ER
+                    </div>
+<h1 class="text-2xl font-extrabold text-white mb-1">Elena Rodriguez</h1>
+<p class="text-on-surface-variant/60 font-medium mb-8">elena.r@sentinel.ai</p>
+<div class="w-full space-y-2">
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-high rounded-lg text-white font-semibold text-sm hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+                                Personal Info
+                            </div>
+<span class="material-symbols-outlined text-white/20">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-highest rounded-lg text-white font-semibold text-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">shield</span>
+                                Emergency Protocols
+                            </div>
+<span class="material-symbols-outlined text-white/20">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-high rounded-lg text-white font-semibold text-sm hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">notifications</span>
+                                Alert Settings
+                            </div>
+<span class="material-symbols-outlined text-white/20">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 ghost-border">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#c7bfff]"></div>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">System Status</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                        The Sentinel’s Veil is active. 3 emergency contacts verified and reachable. Last check-in 14m ago.
+                    </p>
+</div>
+</div>
+<!-- Right Column: Settings & Contacts -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Emergency Contacts Section -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-semibold text-white">Emergency Contacts</h2>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">3 of 5 Slots Filled</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Contact Card 1 -->
+<div class="bg-surface-container-high rounded-xl p-5 ghost-border flex items-start gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<h3 class="font-semibold text-white">Marcus Thorne</h3>
+<span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded uppercase font-bold tracking-tighter">Primary</span>
+</div>
+<p class="text-xs text-on-surface-variant/60 mb-3">Father • +1 (555) 012-3456</p>
+<div class="flex gap-2">
+<button class="text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors">Edit</button>
+<button class="text-[10px] font-bold uppercase tracking-widest text-tertiary hover:text-red-500 transition-colors">Remove</button>
+</div>
+</div>
+</div>
+<!-- Contact Card 2 -->
+<div class="bg-surface-container-high rounded-xl p-5 ghost-border flex items-start gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-white">Sarah Chen</h3>
+<p class="text-xs text-on-surface-variant/60 mb-3">Spouse • +1 (555) 987-6543</p>
+<div class="flex gap-2">
+<button class="text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors">Edit</button>
+<button class="text-[10px] font-bold uppercase tracking-widest text-tertiary hover:text-red-500 transition-colors">Remove</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Add Contact Form -->
+<section class="bg-surface-container-low rounded-xl p-8 ghost-border">
+<h2 class="text-lg font-semibold text-white mb-6">Secure Contact Addition</h2>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-1">Full Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg text-sm p-4 focus:ring-1 focus:ring-primary/40 text-white placeholder:text-white/10" placeholder="e.g. Julian Vane" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-1">Relationship</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg text-sm p-4 focus:ring-1 focus:ring-primary/40 text-white placeholder:text-white/10" placeholder="e.g. Sister" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-1">Secure Phone Line</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg text-sm p-4 focus:ring-1 focus:ring-primary/40 text-white placeholder:text-white/10" placeholder="+1 (___) ___-____" type="tel"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-1">Verification Code</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none rounded-lg text-sm p-4 focus:ring-1 focus:ring-primary/40 text-white/30 italic" placeholder="Auto-gen" readonly="" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-3.5 text-white/20 text-sm">lock</span>
+</div>
+</div>
+<div class="md:col-span-2 pt-4 flex items-center justify-end gap-4">
+<button class="px-6 py-3 text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors" type="button">Discard</button>
+<button class="signature-gradient px-8 py-3 rounded-lg text-on-primary-fixed font-extrabold text-sm shadow-lg active:scale-95 duration-200" type="submit">
+                                Authorize Contact
+                            </button>
+</div>
+</form>
+</section>
+<!-- Data Privacy Card -->
+<div class="bg-glass rounded-xl p-6 ghost-border flex items-center gap-6">
+<div class="bg-tertiary/10 p-3 rounded-full">
+<span class="material-symbols-outlined text-tertiary">privacy_tip</span>
+</div>
+<div>
+<h4 class="text-white font-semibold text-sm mb-1">Encrypted Vault Access</h4>
+<p class="text-xs text-on-surface-variant/60 leading-relaxed">
+                            Your emergency data is stored in a zero-knowledge vault. Not even SaveHer AI staff can view these contacts without an active emergency trigger.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Navigation Shell -->
+<footer class="bg-[#0a0a0f] w-full border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-7xl mx-auto">
+<div class="text-lg font-black text-white/80 mb-6 md:mb-0">SaveHer AI</div>
+<div class="flex flex-wrap justify-center gap-8 mb-8 md:mb-0">
+<a class="font-['Inter'] font-normal text-xs text-white/40 uppercase tracking-widest hover:text-white transition-opacity duration-300" href="#">Privacy Policy</a>
+<a class="font-['Inter'] font-normal text-xs text-white/40 uppercase tracking-widest hover:text-white transition-opacity duration-300" href="#">Terms of Service</a>
+<a class="font-['Inter'] font-normal text-xs text-white/40 uppercase tracking-widest hover:text-white transition-opacity duration-300" href="#">Contact Support</a>
+<a class="font-['Inter'] font-normal text-xs text-white/40 uppercase tracking-widest text-[#7c6af7]" href="#">Emergency Protocol</a>
+</div>
+<div class="font-['Inter'] font-normal text-xs text-white/40 uppercase tracking-widest text-center md:text-right">
+                © 2024 SaveHer AI. Protected by The Sentinel’s Veil.
+            </div>
+</div>
+</footer>
+</body></html>
