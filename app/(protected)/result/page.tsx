@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { generateComplaint, generateShortComplaint, type UserDetails } from "@/lib/services/complaint";
+import { generateComplaintStream, generateShortComplaintStream, type UserDetails } from "@/lib/services/complaint";
 import { useAuth } from "@/context/AuthContext";
 import { db } from "@/lib/firebase";
 import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
@@ -215,6 +215,7 @@ export default function Page() {
 
   const [result, setResult]     = useState<HarassmentAnalysis | null>(null);
   const [generating, setGenerating] = useState(false);
+  const [streamingPreview, setStreamingPreview] = useState("");
   const [showModal, setShowModal]   = useState(false);
   const [savedProfile, setSavedProfile] = useState<Partial<UserDetails>>({});
   const [profileLoaded, setProfileLoaded] = useState(false);
@@ -298,19 +299,40 @@ export default function Page() {
     } catch { /* non-critical */ }
   };
 
-  // Core generation function
+  // Core generation function — uses SSE streaming for progressive text display
   const runGeneration = async (ud: UserDetails) => {
     if (!result) return;
     setGenerating(true);
+    setStreamingPreview("");
     try {
       toast.loading("Drafting your complaint…", { id: "gen" });
-      const [fullComplaint, shortComplaint] = await Promise.all([
-        generateComplaint(result, ud),
-        generateShortComplaint(result, ud),
-      ]);
+
+      let firFull = "";
+      let shortFull = "";
+
+      // Stream FIR complaint — chunks update the live preview
+      const firPromise = generateComplaintStream(
+        result,
+        ud,
+        undefined,
+        (chunk) => {
+          setStreamingPreview((prev) => prev + chunk);
+        }
+      ).then((cleaned) => { firFull = cleaned; });
+
+      // Stream portal complaint in parallel (no visible preview needed)
+      const portalPromise = generateShortComplaintStream(
+        result,
+        ud,
+        undefined,
+        () => {}
+      ).then((cleaned) => { shortFull = cleaned; });
+
+      await Promise.all([firPromise, portalPromise]);
+
       toast.success("Complaint generated!", { id: "gen" });
-      sessionStorage.setItem("saveher_complaint", fullComplaint);
-      sessionStorage.setItem("saveher_short_complaint", shortComplaint);
+      sessionStorage.setItem("saveher_complaint", firFull);
+      sessionStorage.setItem("saveher_short_complaint", shortFull);
       sessionStorage.setItem("saveher_applicable_laws", JSON.stringify(result.applicable_laws ?? []));
       sessionStorage.setItem("saveher_user_details", JSON.stringify(ud));
       sessionStorage.setItem("saveher_harassment_type", result.harassment_type ?? "Harassment");
@@ -563,6 +585,14 @@ export default function Page() {
                   <><span className="material-symbols-outlined text-xl">gavel</span>Generate Complaint</>
                 )}
               </button>
+
+              {/* Live streaming preview — visible only while generating */}
+              {generating && streamingPreview && (
+                <div className="mt-6 p-4 bg-black/40 rounded-xl border border-white/5 max-h-52 overflow-y-auto">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-2">Live Preview</p>
+                  <pre className="text-xs text-white/50 whitespace-pre-wrap font-mono leading-relaxed">{streamingPreview}</pre>
+                </div>
+              )}
             </div>
           </div>
         </div>

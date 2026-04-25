@@ -3,6 +3,9 @@ import type { HarassmentAnalysis } from "./ai";
 const GEMINI_API_URL =
   "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent";
 
+const GEMINI_STREAM_API_URL =
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:streamGenerateContent";
+
 // ── Types ───────────────────────────────────────────────────────────────────────
 export interface AdditionalDetails {
   victimAge?: string;
@@ -96,6 +99,57 @@ async function callGemini(prompt: string, maxTokens = 2048): Promise<string> {
   const text: string = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
   if (!text.trim()) throw new Error("Empty Gemini response");
   return cleanComplaint(text);
+}
+
+// ── Gemini streaming fetch helper ──────────────────────────────────────────────
+async function callGeminiStream(
+  prompt: string,
+  maxTokens = 2048,
+  onChunk: (text: string) => void
+): Promise<string> {
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+  if (!apiKey || apiKey === "your_key_here") throw new Error("No API key");
+  const res = await fetch(`${GEMINI_STREAM_API_URL}?key=${apiKey}&alt=sse`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { temperature: 0.3, maxOutputTokens: maxTokens },
+    }),
+  });
+  if (!res.ok) throw new Error(`Gemini ${res.status}: ${await res.text()}`);
+  if (!res.body) throw new Error("No response body for streaming");
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let fullText = "";
+  let buffer = "";
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop() ?? "";
+    for (const line of lines) {
+      if (!line.startsWith("data: ")) continue;
+      const jsonStr = line.slice(6).trim();
+      if (!jsonStr || jsonStr === "[DONE]") continue;
+      try {
+        const parsed = JSON.parse(jsonStr);
+        const chunk: string =
+          parsed?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+        if (chunk) {
+          fullText += chunk;
+          onChunk(chunk);
+        }
+      } catch { /* skip malformed SSE line */ }
+    }
+  }
+
+  const cleaned = cleanComplaint(fullText);
+  if (!cleaned) throw new Error("Empty Gemini streaming response");
+  return cleaned;
 }
 
 // ════════════════════════════════════════════════════════════════════════════════
@@ -398,6 +452,41 @@ export async function generateShortComplaint(
   } catch (err) {
     console.error("[Complaint] generateShortComplaint failed, using fallback:", err);
     return defaultPortalComplaint(analysisResult, ud);
+  }
+}
+
+// ── Streaming public API ──────────────────────────────────────────────────────
+export async function generateComplaintStream(
+  analysisResult: HarassmentAnalysis,
+  userNameOrDetails: string | UserDetails,
+  additionalDetails: AdditionalDetails | undefined,
+  onChunk: (text: string) => void
+): Promise<string> {
+  const ud = toUserDetails(userNameOrDetails, additionalDetails);
+  try {
+    return await callGeminiStream(buildFIRPrompt(analysisResult, ud), 2048, onChunk);
+  } catch (err) {
+    console.error("[Complaint] generateComplaintStream failed, using fallback:", err);
+    const fallback = defaultFIRComplaint(analysisResult, ud);
+    onChunk(fallback);
+    return fallback;
+  }
+}
+
+export async function generateShortComplaintStream(
+  analysisResult: HarassmentAnalysis,
+  userNameOrDetails: string | UserDetails,
+  additionalDetails: AdditionalDetails | undefined,
+  onChunk: (text: string) => void
+): Promise<string> {
+  const ud = toUserDetails(userNameOrDetails, additionalDetails);
+  try {
+    return await callGeminiStream(buildPortalPrompt(analysisResult, ud), 1500, onChunk);
+  } catch (err) {
+    console.error("[Complaint] generateShortComplaintStream failed, using fallback:", err);
+    const fallback = defaultPortalComplaint(analysisResult, ud);
+    onChunk(fallback);
+    return fallback;
   }
 }
 
