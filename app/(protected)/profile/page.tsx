@@ -88,10 +88,8 @@ export default function Page() {
     if (!user) return;
     setLoadingContacts(true);
     setLoadError(false);
-    const timer = setTimeout(() => { setLoadingContacts(false); setLoadError(true); }, 5000);
     try {
       const snap = await getDoc(doc(db, "users", user.uid));
-      clearTimeout(timer);
       if (snap.exists()) {
         const data = snap.data();
         setContacts(Array.isArray(data.emergencyContacts) ? data.emergencyContacts : []);
@@ -100,7 +98,9 @@ export default function Page() {
       } else {
         setContacts([]);
       }
-    } catch {
+    } catch (err) {
+      console.error("[Profile] loadUserDoc failed:", err);
+      setLoadError(true);
       toast.error("Failed to load profile data.");
     } finally {
       setLoadingContacts(false);
@@ -110,7 +110,7 @@ export default function Page() {
   useEffect(() => {
     loadUserDoc();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [user?.uid]);
 
   // ── Add contact ─────────────────────────────────────────────────────────────
   const handleAddContact = async (e: FormEvent) => {
@@ -135,7 +135,9 @@ export default function Page() {
         phone: normalizedPhone,
         isPrimary: contacts.length === 0,
       };
-      const userRef = doc(db, "users", user.uid);
+      // Ensure auth is resolved before any Firestore write
+      if (!auth.currentUser) { toast.error("Session expired. Please sign in again."); return; }
+      const userRef = doc(db, "users", auth.currentUser.uid);
       const snap = await getDoc(userRef);
       if (!snap.exists()) {
         await setDoc(userRef, { emergencyContacts: [newContact] });
@@ -145,7 +147,8 @@ export default function Page() {
       toast.success("Contact added successfully!");
       setNewName(""); setNewRelationship(""); setNewPhone("");
       await loadUserDoc();
-    } catch {
+    } catch (err) {
+      console.error("[Profile] handleAddContact failed:", err);
       toast.error("Could not save, check connection.");
     } finally {
       setSaving(false);
@@ -162,7 +165,8 @@ export default function Page() {
       });
       toast.success(`${contact.name} removed.`);
       await loadUserDoc();
-    } catch {
+    } catch (err) {
+      console.error("[Profile] handleDelete failed:", err);
       toast.error("Could not save, check connection.");
     } finally {
       setDeletingId(null);
@@ -200,7 +204,8 @@ export default function Page() {
       toast.success("Contact updated!");
       setEditingId(null);
       await loadUserDoc();
-    } catch {
+    } catch (err) {
+      console.error("[Profile] handleSaveEdit failed:", err);
       toast.error("Could not save, check connection.");
     } finally {
       setEditLoading(false);
@@ -220,7 +225,8 @@ export default function Page() {
         await updateDoc(userRef, { alertPreferences: { email: emailVal, sms: smsVal } });
       }
       toast.success("Alert preferences saved.");
-    } catch {
+    } catch (err) {
+      console.error("[Profile] saveAlerts failed:", err);
       toast.error("Could not save, check connection.");
     } finally {
       setAlertsLoading(false);

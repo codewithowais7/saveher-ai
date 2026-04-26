@@ -75,6 +75,7 @@ export default function Page() {
   // ── Nearby ────────────────────────────────────────────────────────────────────
   const [nearbyPlaces, setNearbyPlaces] = useState<NearbyPlace[]>([]);
   const [fetchingNearby, setFetchingNearby] = useState(false);
+  const [nearbyError, setNearbyError] = useState(false);
 
   // ── Audio ─────────────────────────────────────────────────────────────────────
   const [audioActive, setAudioActive] = useState(false);
@@ -145,12 +146,14 @@ export default function Page() {
   // ── Fetch nearby emergency services ──────────────────────────────────────────
   const fetchNearby = useCallback(async (lat: number, lon: number) => {
     setFetchingNearby(true);
+    setNearbyError(false);
     try {
       const query = `[out:json][timeout:25];(node["amenity"="hospital"](around:3000,${lat},${lon});node["amenity"="police"](around:3000,${lat},${lon});node["amenity"="clinic"](around:3000,${lat},${lon}););out body;`;
       const res = await fetch("https://overpass-api.de/api/interpreter", {
         method: "POST",
         body: query,
       });
+      if (!res.ok) throw new Error(`Overpass HTTP ${res.status}`);
       const data = await res.json();
       const places: NearbyPlace[] = (data.elements ?? [])
         .filter((e: any) => e.lat && e.lon)
@@ -165,8 +168,9 @@ export default function Page() {
         .sort((a: NearbyPlace, b: NearbyPlace) => a.distance - b.distance)
         .slice(0, 8);
       setNearbyPlaces(places);
-    } catch {
-      // Overpass may time out — silently ignore
+    } catch (err) {
+      console.error("[SOS] Overpass fetch failed:", err);
+      setNearbyError(true);
     } finally {
       setFetchingNearby(false);
     }
@@ -178,6 +182,8 @@ export default function Page() {
       setGpsError("Geolocation is not supported by your browser.");
       return;
     }
+    // Don't start a second watch if one is already running
+    if (watchIdRef.current !== null) return;
     setGpsError("");
     watchIdRef.current = navigator.geolocation.watchPosition(
       (pos) => {
@@ -188,7 +194,7 @@ export default function Page() {
       },
       (err) => {
         if (err.code === 1) {
-          setGpsError("Please enable location in browser settings.");
+          setGpsError("Location access denied.");
         } else {
           setGpsError("Could not acquire location.");
         }
@@ -196,6 +202,12 @@ export default function Page() {
       { enableHighAccuracy: true, maximumAge: 5000 }
     );
   }, [reverseGeocode, fetchNearby]);
+
+  // ── Auto-start GPS on mount ───────────────────────────────────────────────────
+  useEffect(() => {
+    startGPS();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // ── Start audio recording ──────────────────────────────────────────────────────
   const startAudio = useCallback(async () => {
@@ -345,9 +357,10 @@ export default function Page() {
     };
   }, []);
 
-  // ── Map thumbnail URL ─────────────────────────────────────────────────────────
-  const mapThumbUrl = coords
-    ? `https://staticmap.openstreetmap.de/staticmap.php?center=${coords.lat},${coords.lng}&zoom=15&size=300x150&markers=${coords.lat},${coords.lng},red`
+  // ── Map URLs ──────────────────────────────────────────────────────────────────
+  // OSM embed — no API key required
+  const osmEmbedUrl = coords
+    ? `https://www.openstreetmap.org/export/embed.html?bbox=${coords.lng - 0.01},${coords.lat - 0.01},${coords.lng + 0.01},${coords.lat + 0.01}&layer=mapnik&marker=${coords.lat},${coords.lng}`
     : null;
   const googleMapsUrl = coords
     ? `https://www.google.com/maps?q=${coords.lat},${coords.lng}`
@@ -514,22 +527,25 @@ export default function Page() {
           {/* Map card */}
           <div className="bg-surface-container-low rounded-xl overflow-hidden shadow-2xl border border-white/5">
             <div className="relative h-48 w-full bg-surface-container-highest">
-              {mapThumbUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={mapThumbUrl}
-                  alt="OpenStreetMap location"
-                  className="w-full h-full object-cover opacity-80"
+              {osmEmbedUrl ? (
+                <iframe
+                  src={osmEmbedUrl}
+                  className="w-full h-full border-0"
+                  allowFullScreen
+                  loading="lazy"
+                  title="Live Location Map"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="text-center text-white/20">
                     <span className="material-symbols-outlined text-4xl block mb-2">map</span>
-                    <span className="text-xs uppercase tracking-widest">Waiting for GPS…</span>
+                    <span className="text-xs uppercase tracking-widest">
+                      {gpsError ? gpsError : "Waiting for GPS…"}
+                    </span>
                   </div>
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent" />
+              {!osmEmbedUrl && <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent" />}
               <div className="absolute bottom-4 left-4">
                 <div className="text-white font-bold">Current Location</div>
                 <div className="text-white/60 text-xs">
@@ -604,7 +620,11 @@ export default function Page() {
               </div>
             ) : (
               <p className="text-white/30 text-xs text-center py-4">
-                {coords ? (fetchingNearby ? "Searching…" : "No services found within 3 km.") : "Activate SOS to find nearby services."}
+                {nearbyError
+                  ? "Could not load nearby services."
+                  : coords
+                  ? (fetchingNearby ? "Searching…" : "No services found nearby.")
+                  : "Acquiring location…"}
               </p>
             )}
           </div>

@@ -300,10 +300,10 @@ export default function Page() {
                 <a className="border border-outline-variant/20 text-white/60 px-8 py-4 rounded-lg font-semibold text-sm hover:text-white hover:bg-white/5 transition-all cursor-pointer inline-block" onClick={(e) => handleScroll(e, '#how-it-works')}>
                   See how it works
                 </a>
-                <button className="bg-tertiary-container text-white px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200 flex items-center gap-2" onClick={() => router.push('/sos')}>
+                <a href="/sos" className="bg-tertiary-container text-white px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-white pulse-pip"></span>
                   SOS Emergency
-                </button>
+                </a>
               </div>
               {/* Demo Mode — skip upload, show mock result instantly */}
               <button
