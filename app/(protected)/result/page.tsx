@@ -407,7 +407,7 @@ export default function Page() {
             <Link className="font-semibold text-sm tracking-tight text-white/60 hover:text-white transition-colors" href="/how-it-works">How it works</Link>
             <Link className="font-semibold text-sm tracking-tight text-white border-b-2 border-[#7c6af7] pb-1" href="/complaint">Report</Link>
           </div>
-          <Link href="/profile"><button className="bg-gradient-to-br from-primary to-primary-container px-6 py-2.5 rounded-lg text-white font-extrabold text-sm active:scale-95 duration-200">Get Protected</button></Link>
+          <Link href="/upload"><button className="bg-gradient-to-br from-primary to-primary-container px-6 py-2.5 rounded-lg text-white font-extrabold text-sm active:scale-95 duration-200">Get Protected</button></Link>
         </nav>
       </header>
 

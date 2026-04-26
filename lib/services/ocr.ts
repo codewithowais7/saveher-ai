@@ -8,28 +8,17 @@ import Tesseract from "tesseract.js";
  * @returns Extracted text string, or empty string on failure
  */
 export async function extractTextFromImage(imageFile: File): Promise<string> {
-  console.log("[OCR] extractTextFromImage → start", imageFile.name);
-
   try {
     const imageUrl = URL.createObjectURL(imageFile);
 
     const result = await Tesseract.recognize(imageUrl, "eng", {
       // Suppress Tesseract's own verbose logger in production
-      logger: (m) => {
-        if (m.status === "recognizing text") {
-          console.log(`[OCR] Progress: ${Math.round(m.progress * 100)}%`);
-        }
-      },
+      logger: () => {},
     });
 
     URL.revokeObjectURL(imageUrl);
 
-    const text = result.data.text.trim();
-    console.log(
-      "[OCR] extractTextFromImage → done. Characters extracted:",
-      text.length
-    );
-    return text;
+    return result.data.text.trim();
   } catch (error) {
     console.error("[OCR] extractTextFromImage → failed:", error);
     return "";
@@ -43,8 +32,6 @@ export async function extractTextFromImage(imageFile: File): Promise<string> {
  * @param imageFile - Raw image file
  */
 export async function preprocessImage(imageFile: File): Promise<Blob> {
-  console.log("[OCR] preprocessImage → start", imageFile.name);
-
   try {
     const bitmap = await createImageBitmap(imageFile);
     const canvas = document.createElement("canvas");
@@ -69,7 +56,6 @@ export async function preprocessImage(imageFile: File): Promise<Blob> {
       canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("toBlob failed"))), "image/png")
     );
 
-    console.log("[OCR] preprocessImage → done");
     return blob;
   } catch (error) {
     console.error("[OCR] preprocessImage → failed, returning original:", error);

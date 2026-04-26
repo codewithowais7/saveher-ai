@@ -16,7 +16,7 @@ export default function Page() {
 <Link className="text-white/60 hover:text-white/90 transition-colors" href="/">Safety Network</Link>
 </div>
 <div className="flex items-center space-x-6">
-<Link href="/profile"><button className="bg-gradient-to-br from-[#c7bfff] to-[#8e7fff] text-[#180065] px-6 py-2.5 rounded-lg font-extrabold active:scale-95 duration-200 transition-all">
+<Link href="/upload"><button className="bg-gradient-to-br from-[#c7bfff] to-[#8e7fff] text-[#180065] px-6 py-2.5 rounded-lg font-extrabold active:scale-95 duration-200 transition-all">
                     Get Protected
                 </button></Link>
 <span className="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors" data-icon="account_circle">account_circle</span>

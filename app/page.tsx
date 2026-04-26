@@ -278,7 +278,7 @@ export default function Page() {
             {user && (
               <button
                 onClick={() => { window.location.href = '/profile'; }}
-                className="w-9 h-9 rounded-full flex items-center justify-center text-[#25008c] font-extrabold text-xs flex-shrink-0 active:scale-95 transition-transform duration-200 shadow-[0_0_12px_rgba(199,191,255,0.25)]"
+                className="w-9 h-9 rounded-full flex items-center justify-center text-white font-extrabold text-xs flex-shrink-0 active:scale-95 transition-transform duration-200 shadow-[0_0_12px_rgba(199,191,255,0.25)]"
                 style={{ background: 'linear-gradient(135deg, #c7bfff 0%, #8e7fff 100%)' }}
                 title="Go to Profile"
               >

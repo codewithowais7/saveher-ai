@@ -19,7 +19,6 @@ export interface EmergencyContact {
  * Rejects if the user denies permission or if geolocation is unavailable.
  */
 export function getLocation(): Promise<Coords> {
-  console.log("[SOS] getLocation → start");
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
       reject(new Error("Geolocation is not supported by this browser."));
@@ -31,7 +30,6 @@ export function getLocation(): Promise<Coords> {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude,
         };
-        console.log("[SOS] getLocation → done", coords);
         resolve(coords);
       },
       (err) => {
@@ -47,9 +45,7 @@ export function getLocation(): Promise<Coords> {
  * Build a Google Maps deep-link for the given coordinates.
  */
 export function buildMapLink(lat: number, lng: number): string {
-  const link = `https://maps.google.com/?q=${lat},${lng}`;
-  console.log("[SOS] buildMapLink →", link);
-  return link;
+  return `https://maps.google.com/?q=${lat},${lng}`;
 }
 
 /**
@@ -67,8 +63,6 @@ export function sendSOSAlert(
   lng: number,
   userName: string
 ): void {
-  console.log("[SOS] sendSOSAlert → start", { contacts, lat, lng, userName });
-
   const mapLink = buildMapLink(lat, lng);
   const subject = encodeURIComponent("EMERGENCY - SaveHer AI Alert");
   const body = encodeURIComponent(
@@ -87,8 +81,6 @@ export function sendSOSAlert(
   document.body.appendChild(anchor);
   anchor.click();
   document.body.removeChild(anchor);
-
-  console.log("[SOS] sendSOSAlert → done, mailto opened");
 }
 
 /**
@@ -103,7 +95,6 @@ export async function saveSOSLog(
   lat: number,
   lng: number
 ): Promise<void> {
-  console.log("[SOS] saveSOSLog → start", { userId, lat, lng });
   try {
     await addDoc(collection(db, "sos_logs"), {
       userId,
@@ -111,7 +102,6 @@ export async function saveSOSLog(
       lng,
       timestamp: serverTimestamp(),
     });
-    console.log("[SOS] saveSOSLog → done");
   } catch (error) {
     console.error("[SOS] saveSOSLog → failed:", error);
     throw error;

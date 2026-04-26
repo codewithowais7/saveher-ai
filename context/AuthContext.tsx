@@ -77,7 +77,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const sendVerification = async () => {
     if (auth.currentUser) {
       await sendEmailVerification(auth.currentUser);
-      console.log("Verification email sent to:", auth.currentUser.email);
     }
   };
 

@@ -58,10 +58,6 @@ export async function analyzeHarassment(
   extractedText: string,
   userDescription: string
 ): Promise<HarassmentAnalysis> {
-  console.log("[AI] analyzeHarassment → start", {
-    textLength: extractedText.length,
-    descriptionLength: userDescription.length,
-  });
 
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
   if (!apiKey || apiKey === "your_key_here") {
@@ -152,7 +148,6 @@ Only include sections that are genuinely applicable. Do not include irrelevant o
     if (!parsed.platform_report_steps) parsed.platform_report_steps = FALLBACK_ANALYSIS.platform_report_steps;
     if (!parsed.urgency_note) parsed.urgency_note = FALLBACK_ANALYSIS.urgency_note;
 
-    console.log("[AI] analyzeHarassment → done", parsed);
     return parsed;
   } catch (error) {
     console.error("[AI] analyzeHarassment → failed, returning fallback:", error);
@@ -169,8 +164,6 @@ Only include sections that are genuinely applicable. Do not include irrelevant o
 export async function classifyThreat(
   content: string
 ): Promise<HarassmentAnalysis["severity"]> {
-  console.log("[AI] classifyThreat → start");
   const result = await analyzeHarassment(content, "");
-  console.log("[AI] classifyThreat → done:", result.severity);
   return result.severity;
 }

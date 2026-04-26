@@ -491,15 +491,15 @@ export async function generateShortComplaintStream(
 }
 
 // ── Stubs ───────────────────────────────────────────────────────────────────────
-export async function saveComplaint(userId: string, complaintData: Record<string, unknown>): Promise<void> {
-  console.log("[Complaint] saveComplaint → stub", { userId, complaintData });
+export async function saveComplaint(_userId: string, _complaintData: Record<string, unknown>): Promise<void> {
+  // stub
 }
-export async function fetchComplaints(userId: string): Promise<void> {
-  console.log("[Complaint] fetchComplaints → stub", { userId });
+export async function fetchComplaints(_userId: string): Promise<void> {
+  // stub
 }
-export async function submitComplaint(complaintId: string): Promise<void> {
-  console.log("[Complaint] submitComplaint → stub", { complaintId });
+export async function submitComplaint(_complaintId: string): Promise<void> {
+  // stub
 }
-export async function deleteComplaint(complaintId: string): Promise<void> {
-  console.log("[Complaint] deleteComplaint → stub", { complaintId });
+export async function deleteComplaint(_complaintId: string): Promise<void> {
+  // stub
 }

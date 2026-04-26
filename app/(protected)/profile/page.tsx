@@ -252,9 +252,9 @@ export default function Page() {
             <Link className="text-white/60 hover:text-white transition-colors duration-300" href="/complaint">Report</Link>
             <Link className="text-white border-b-2 border-[#7c6af7] pb-1" href="/profile">Profile</Link>
           </div>
-          <Link href="/profile">
-            <button className="signature-gradient text-on-primary-fixed px-5 py-2 rounded-lg font-extrabold text-sm active:scale-95 duration-200">Get Protected</button>
-          </Link>
+          <a href="/upload">
+            <button className="signature-gradient text-white px-5 py-2 rounded-lg font-extrabold text-sm active:scale-95 duration-200">Get Protected</button>
+          </a>
         </div>
       </nav>
 
@@ -266,7 +266,10 @@ export default function Page() {
 
             {/* Profile card */}
             <div className="bg-surface-container-low rounded-xl p-8 flex flex-col items-center text-center ghost-border">
-              <div className="w-32 h-32 rounded-full signature-gradient flex items-center justify-center text-on-primary-container text-4xl font-extrabold mb-6 shadow-[0_0_30px_rgba(199,191,255,0.2)]">
+              <div
+                className="w-32 h-32 rounded-full flex items-center justify-center text-white text-4xl font-extrabold mb-6 shadow-[0_0_30px_rgba(199,191,255,0.2)]"
+                style={{ background: 'linear-gradient(135deg, #c7bfff 0%, #8e7fff 100%)' }}
+              >
                 {initials}
               </div>
               <h1 className="text-2xl font-extrabold text-white mb-1">
@@ -311,10 +314,10 @@ export default function Page() {
 
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center justify-between p-4 bg-surface-container-high rounded-lg text-tertiary font-semibold text-sm hover:bg-surface-container-highest transition-colors"
+                  className="w-full flex items-center justify-between p-4 bg-surface-container-high rounded-lg text-red-400 font-semibold text-sm hover:bg-surface-container-highest hover:text-red-300 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-tertiary">logout</span>
+                    <span className="material-symbols-outlined text-red-400">logout</span>
                     Sign Out
                   </div>
                   <span className="material-symbols-outlined text-white/20">chevron_right</span>

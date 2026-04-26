@@ -294,7 +294,7 @@ export default function Page() {
             <Link className="text-white/60 hover:text-white transition-colors" href="/how-it-works">How it works</Link>
             <Link className="text-white border-b-2 border-[#7c6af7] pb-1 hover:text-white transition-colors" href="/complaint">Report</Link>
           </nav>
-          <Link href="/profile"><button className="bg-[#7c6af7] text-white px-6 py-2.5 rounded-lg font-bold text-sm active:scale-95 duration-200">Get Protected</button></Link>
+          <Link href="/upload"><button className="bg-[#7c6af7] text-white px-6 py-2.5 rounded-lg font-bold text-sm active:scale-95 duration-200">Get Protected</button></Link>
         </div>
       </header>
 

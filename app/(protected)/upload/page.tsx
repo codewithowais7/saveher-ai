@@ -135,7 +135,7 @@ export default function Page() {
 <Link className="text-white/60 hover:text-white transition-colors duration-300" href="/how-it-works">How it works</Link>
 <Link className="text-white border-b-2 border-[#7c6af7] pb-1" href="/complaint">Report</Link>
 </div>
-<Link href="/profile"><button className="bg-[#7c6af7] text-white px-6 py-2 rounded-lg font-extrabold active:scale-95 duration-200 text-sm tracking-tight">
+<Link href="/upload"><button className="bg-[#7c6af7] text-white px-6 py-2 rounded-lg font-extrabold active:scale-95 duration-200 text-sm tracking-tight">
                 Get Protected
             </button></Link>
 </div>
