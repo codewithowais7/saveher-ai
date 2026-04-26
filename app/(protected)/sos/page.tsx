@@ -422,8 +422,8 @@ export default function Page() {
         {/* ── Left: SOS button + audio status ── */}
         <div className="lg:col-span-7 flex flex-col items-center justify-center py-12">
           <div className="relative flex items-center justify-center mb-16">
-            <div className={`absolute w-[320px] h-[320px] rounded-full border border-[#dc2626]/20 ${sosActive ? "animate-ping opacity-20" : "opacity-10"}`} />
-            <div className={`absolute w-[240px] h-[240px] rounded-full border border-[#dc2626]/40 ${sosActive ? "animate-pulse opacity-30" : "opacity-10"}`} />
+            <div className={`sos-ring-outer absolute w-[320px] h-[320px] rounded-full border border-[#dc2626]/20 ${sosActive ? "animate-ping opacity-20" : "opacity-10"}`} />
+            <div className={`sos-ring-inner absolute w-[240px] h-[240px] rounded-full border border-[#dc2626]/40 ${sosActive ? "animate-pulse opacity-30" : "opacity-10"}`} />
 
             <button
               onClick={handleSOS}
