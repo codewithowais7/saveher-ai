@@ -417,18 +417,18 @@ export default function Page() {
         </div>
       </header>
 
-      <main className="flex-grow pt-24 pb-40 px-6 max-w-5xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <main className="flex-grow pt-24 pb-56 md:pb-40 px-4 sm:px-6 max-w-5xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start overflow-hidden">
 
         {/* ── Left: SOS button + audio status ── */}
         <div className="lg:col-span-7 flex flex-col items-center justify-center py-12">
           <div className="relative flex items-center justify-center mb-16">
-            <div className={`sos-ring-outer absolute w-[320px] h-[320px] rounded-full border border-[#dc2626]/20 ${sosActive ? "animate-ping opacity-20" : "opacity-10"}`} />
-            <div className={`sos-ring-inner absolute w-[240px] h-[240px] rounded-full border border-[#dc2626]/40 ${sosActive ? "animate-pulse opacity-30" : "opacity-10"}`} />
+            <div className={`sos-ring-outer absolute w-[220px] h-[220px] sm:w-[320px] sm:h-[320px] rounded-full border border-[#dc2626]/20 ${sosActive ? "animate-ping opacity-20" : "opacity-10"}`} />
+            <div className={`sos-ring-inner absolute w-[160px] h-[160px] sm:w-[240px] sm:h-[240px] rounded-full border border-[#dc2626]/40 ${sosActive ? "animate-pulse opacity-30" : "opacity-10"}`} />
 
             <button
               onClick={handleSOS}
               disabled={activating || sosActive}
-              className="relative z-10 w-48 h-48 rounded-full bg-[#dc2626] flex flex-col items-center justify-center active:scale-95 transition-transform duration-200 shadow-[0_0_60px_rgba(220,38,36,0.4)] disabled:opacity-70 select-none"
+              className="relative z-10 w-36 h-36 sm:w-48 sm:h-48 rounded-full bg-[#dc2626] flex flex-col items-center justify-center active:scale-95 transition-transform duration-200 shadow-[0_0_60px_rgba(220,38,36,0.4)] disabled:opacity-70 select-none"
             >
               {activating ? (
                 <>
@@ -446,7 +446,7 @@ export default function Page() {
             </button>
           </div>
 
-          <div className="text-center space-y-4 w-full max-w-md mx-auto">
+          <div className="text-center space-y-4 w-full max-w-md mx-auto px-4 overflow-hidden">
             <h1 className="text-3xl font-extrabold text-white tracking-tight">
               {sosActive
                 ? `Alert sent to ${contacts.length} contact${contacts.length !== 1 ? "s" : ""}`
@@ -754,7 +754,7 @@ export default function Page() {
       </main>
 
       {/* ── False Alarm / Cancel CTA fixed at bottom ── */}
-      <div className="fixed bottom-12 left-1/2 -translate-x-1/2 w-full max-w-xs px-6">
+      <div className="fixed bottom-6 sm:bottom-12 left-1/2 -translate-x-1/2 w-full max-w-xs px-6 z-40">
         <button
           onClick={handleFalseAlarm}
           className="w-full bg-surface-container-highest border border-white/10 py-5 rounded-2xl flex items-center justify-center gap-3 active:scale-95 transition-all shadow-2xl backdrop-blur-xl group"

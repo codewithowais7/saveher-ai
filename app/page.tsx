@@ -262,7 +262,7 @@ export default function Page() {
   return (
     <div className="bg-background text-on-surface font-body selection:bg-primary/30 w-full max-w-[100vw] overflow-x-hidden">
       <nav className="fixed top-0 w-full z-50 bg-[#0a0a0f]/60 backdrop-blur-3xl shadow-[0_0_40px_rgba(199,191,255,0.06)]">
-        <div className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+        <div className="flex justify-between items-center px-4 md:px-8 py-4 max-w-7xl mx-auto">
           <a className="text-xl font-extrabold tracking-tighter text-[#c7bfff] cursor-pointer" onClick={(e) => handleScroll(e, '#overview')}>SaveHer AI</a>
           <div className="hidden md:flex gap-8 items-center font-['Inter'] font-semibold text-sm tracking-tight">
             <a onClick={(e) => handleScroll(e, '#overview')} className={`cursor-pointer transition-colors duration-300 pb-1 ${activeTab === 'overview' ? 'text-[#c7bfff] border-b-2 border-[#7c6af7]' : 'text-white/60 hover:text-white'}`}>Overview</a>
@@ -308,15 +308,15 @@ export default function Page() {
               <p className="text-lg text-white/40 max-w-md mb-10 leading-relaxed">
                 Advanced neural monitoring and automated legal documentation for a safer digital footprint. Immediate analysis, zero friction.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <button className="bg-gradient-to-br from-[#c7bfff] to-[#8e7fff] text-on-primary-fixed px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200 cursor-pointer inline-block" onClick={() => router.push('/upload')}>
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+                <button className="bg-gradient-to-br from-[#c7bfff] to-[#8e7fff] text-on-primary-fixed px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200 cursor-pointer w-full sm:w-auto max-w-xs mx-auto sm:mx-0" onClick={() => router.push('/upload')}>
                   Analyze Harassment
                 </button>
-                <a className="border border-outline-variant/20 text-white/60 px-8 py-4 rounded-lg font-semibold text-sm hover:text-white hover:bg-white/5 transition-all cursor-pointer inline-block" onClick={(e) => handleScroll(e, '#how-it-works')}>
+                <a className="border border-outline-variant/20 text-white/60 px-8 py-4 rounded-lg font-semibold text-sm hover:text-white hover:bg-white/5 transition-all cursor-pointer text-center w-full sm:w-auto max-w-xs mx-auto sm:mx-0" onClick={(e) => handleScroll(e, '#how-it-works')}>
                   See how it works
                 </a>
                 <button
-                  className="bg-tertiary-container text-white px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200 flex items-center gap-2"
+                  className="bg-tertiary-container text-white px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200 flex items-center justify-center gap-2 w-full sm:w-auto max-w-xs mx-auto sm:mx-0"
                   onClick={() => { window.location.href = '/sos'; }}
                 >
                   <span className="w-2 h-2 rounded-full bg-white pulse-pip"></span>
