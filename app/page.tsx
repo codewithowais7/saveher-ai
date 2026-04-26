@@ -271,9 +271,24 @@ export default function Page() {
             <a onClick={(e) => handleScroll(e, '#report')} className={`cursor-pointer transition-colors duration-300 pb-1 ${activeTab === 'report' ? 'text-[#c7bfff] border-b-2 border-[#7c6af7]' : 'text-white/60 hover:text-white'}`}>Report</a>
             <a onClick={(e) => handleScroll(e, '#profile')} className={`cursor-pointer transition-colors duration-300 pb-1 ${activeTab === 'profile' ? 'text-[#c7bfff] border-b-2 border-[#7c6af7]' : 'text-white/60 hover:text-white'}`}>Profile</a>
           </div>
-          <button onClick={goProtected} className="bg-[#7c6af7] text-white px-5 py-2.5 rounded-lg font-extrabold text-sm active:scale-95 duration-200 shadow-lg shadow-primary/20 transition-transform">
-            Get Protected
-          </button>
+          <div className="flex items-center gap-3">
+            <button onClick={goProtected} className="bg-[#7c6af7] text-white px-5 py-2.5 rounded-lg font-extrabold text-sm active:scale-95 duration-200 shadow-lg shadow-primary/20 transition-transform">
+              Get Protected
+            </button>
+            {user && (
+              <button
+                onClick={() => { window.location.href = '/profile'; }}
+                className="w-9 h-9 rounded-full flex items-center justify-center text-[#25008c] font-extrabold text-xs flex-shrink-0 active:scale-95 transition-transform duration-200 shadow-[0_0_12px_rgba(199,191,255,0.25)]"
+                style={{ background: 'linear-gradient(135deg, #c7bfff 0%, #8e7fff 100%)' }}
+                title="Go to Profile"
+              >
+                {(user.displayName
+                  ? (() => { const p = user.displayName.trim().split(' '); return p.length >= 2 ? (p[0][0] + p[p.length - 1][0]).toUpperCase() : p[0].slice(0, 2).toUpperCase(); })()
+                  : user.email ? user.email[0].toUpperCase() : '?'
+                )}
+              </button>
+            )}
+          </div>
         </div>
       </nav>
 
@@ -300,10 +315,13 @@ export default function Page() {
                 <a className="border border-outline-variant/20 text-white/60 px-8 py-4 rounded-lg font-semibold text-sm hover:text-white hover:bg-white/5 transition-all cursor-pointer inline-block" onClick={(e) => handleScroll(e, '#how-it-works')}>
                   See how it works
                 </a>
-                <a href="/sos" className="bg-tertiary-container text-white px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200 flex items-center gap-2">
+                <button
+                  className="bg-tertiary-container text-white px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200 flex items-center gap-2"
+                  onClick={() => setTimeout(() => { window.location.replace('/sos'); }, 50)}
+                >
                   <span className="w-2 h-2 rounded-full bg-white pulse-pip"></span>
                   SOS Emergency
-                </a>
+                </button>
               </div>
               {/* Demo Mode — skip upload, show mock result instantly */}
               <button

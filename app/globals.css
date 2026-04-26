@@ -78,4 +78,15 @@
     background: rgba(31, 31, 37, 0.6);
     backdrop-filter: blur(24px);
   }
+  .ghost-border {
+    border: 1px solid rgba(199, 191, 255, 0.08);
+  }
+  .signature-gradient {
+    background: linear-gradient(135deg, #c7bfff 0%, #8e7fff 100%);
+  }
+  .bg-glass {
+    background: rgba(27, 27, 32, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(199, 191, 255, 0.06);
+  }
 }
