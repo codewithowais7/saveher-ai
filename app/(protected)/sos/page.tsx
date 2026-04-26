@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useAuth } from "@/context/AuthContext";
 import { db } from "@/lib/firebase";
@@ -56,7 +55,9 @@ const AVATAR_COLORS = [
 
 export default function Page() {
   const { user } = useAuth();
-  const router = useRouter();
+
+  // ── Mount guard (prevents SSR/prerender mismatch in static export) ───────────
+  const [mounted, setMounted] = useState(false);
 
   // ── Core toggle ───────────────────────────────────────────────────────────────
   const [sosActive, setSosActive] = useState(false);
@@ -97,6 +98,9 @@ export default function Page() {
 
   // ── False alarm confirm ───────────────────────────────────────────────────────
   const [showFalseAlarmConfirm, setShowFalseAlarmConfirm] = useState(false);
+
+  // ── Mount effect (must be first) ──────────────────────────────────────────────
+  useEffect(() => { setMounted(true); }, []);
 
   // ── Load contacts ─────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -297,15 +301,14 @@ export default function Page() {
 
     contacts.forEach((c) => {
       const body = `${c.name}, ${userName} needs immediate help!\n\n📍 Location: ${locationStr}\n🗺️ Live Map: ${mapUrl}\n\nPlease call them immediately.\nThis alert was sent via SaveHer AI Safety Platform.`;
-      const subject = "🚨 EMERGENCY ALERT - SaveHer AI";
       window.open(
-        `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+        `https://wa.me/${c.phone.replace(/\D/g, "")}?text=${encodeURIComponent(body)}`,
         "_blank"
       );
     });
 
     setAlertsSent(true);
-    toast.success("Alert emails opened for all contacts. Please send them.", { duration: 6000 });
+    toast.success("WhatsApp alert opened for all contacts. Please send them.", { duration: 6000 });
   }, [contacts, coords, address, user]);
 
   // ── ACTIVATE SOS ─────────────────────────────────────────────────────────────
@@ -330,7 +333,7 @@ export default function Page() {
 
   // ── CANCEL SOS ────────────────────────────────────────────────────────────────
   const handleFalseAlarm = () => {
-    if (!sosActive) { router.push("/"); return; }
+    if (!sosActive) { window.location.href = '/'; return; }
     setShowFalseAlarmConfirm(true);
   };
 
@@ -365,6 +368,8 @@ export default function Page() {
   const googleMapsUrl = coords
     ? `https://www.google.com/maps?q=${coords.lat},${coords.lng}`
     : null;
+
+  if (!mounted) return null;
 
   return (
     <>

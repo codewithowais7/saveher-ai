@@ -35,7 +35,7 @@ const DEMO_RESULT = {
 };
 
 export default function Page() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [activeTab, setActiveTab] = useState('overview');
   const router = useRouter();
 
@@ -275,7 +275,7 @@ export default function Page() {
             <button onClick={goProtected} className="bg-[#7c6af7] text-white px-5 py-2.5 rounded-lg font-extrabold text-sm active:scale-95 duration-200 shadow-lg shadow-primary/20 transition-transform">
               Get Protected
             </button>
-            {user && (
+            {!loading && user && (
               <button
                 onClick={() => { window.location.href = '/profile'; }}
                 className="w-9 h-9 rounded-full flex items-center justify-center text-white font-extrabold text-xs flex-shrink-0 active:scale-95 transition-transform duration-200 shadow-[0_0_12px_rgba(199,191,255,0.25)]"
@@ -317,7 +317,7 @@ export default function Page() {
                 </a>
                 <button
                   className="bg-tertiary-container text-white px-8 py-4 rounded-lg font-extrabold text-sm active:scale-95 duration-200 flex items-center gap-2"
-                  onClick={() => setTimeout(() => { window.location.replace('/sos'); }, 50)}
+                  onClick={() => { window.location.href = '/sos'; }}
                 >
                   <span className="w-2 h-2 rounded-full bg-white pulse-pip"></span>
                   SOS Emergency

@@ -1,7 +1,6 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
 import { useEffect, ReactNode } from "react";
 
 interface ProtectedRouteProps {
@@ -13,25 +12,28 @@ interface ProtectedRouteProps {
  * - Redirects to /login if unauthenticated.
  * - Redirects to /verify-email if authenticated but email not verified
  *   AND the user did NOT sign in with Google (Google users are always verified).
+ *
+ * Uses window.location.replace for redirects to guarantee navigation works
+ * regardless of Next.js router state (avoids silent router.replace failures
+ * in static-export mode).
  */
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, loading } = useAuth();
-  const router = useRouter();
 
   useEffect(() => {
     if (loading) return;
     if (!user) {
-      router.replace("/login");
+      window.location.replace("/login");
       return;
     }
     // Check if signed in with Google — Google accounts are always email-verified
     const isGoogle = user.providerData.some((p) => p.providerId === "google.com");
     if (!isGoogle && !user.emailVerified) {
-      router.replace("/verify-email");
+      window.location.replace("/verify-email");
     }
-  }, [user, loading, router]);
+  }, [user, loading]);
 
-  // Show nothing while loading or redirecting
+  // Show spinner while auth state is loading
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
